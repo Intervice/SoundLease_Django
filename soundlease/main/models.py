@@ -22,8 +22,9 @@ class Beat(models.Model):
     audio_file = models.FileField("Аудіо-файл", upload_to="beats/")
     demo_file = models.FileField("Демо-файл", upload_to="demos/", blank=True, null=True)
     cover_image = models.ImageField("Обкладинка", upload_to="covers/", default="images/default.png")
-    slug = models.SlugField("Слаг", unique_for_date=pub_date)
-    tag = models.ManyToManyField(Tag, verbose_name="Теги", blank=True)
+    slug = models.SlugField("Слаг")
+    tags = models.ManyToManyField(Tag, verbose_name="Теги", blank=True)
+
     objects = models.Manager()
 
     def __str__(self):
@@ -31,11 +32,7 @@ class Beat(models.Model):
 
     def get_absolute_url(self):
         try:
-            pub = self.pub_date
-            url = reverse("beat-detail", kwargs={"year": pub.strftime("%Y"),
-                                                 "month": pub.strftime("%m"),
-                                                 "day": pub.strftime("%d"),
-                                                 "slug": self.slug, })
+            url = reverse("beat-detail", kwargs={"slug": self.slug, })
         except:
             url = "/"
         return url
