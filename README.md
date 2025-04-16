@@ -8,3 +8,5 @@
 ## Useful links:
 ### Technical specifications:
 [LINK](https://docs.google.com/document/d/1TnPctIuzRHiXYcOrS5QLsmzbi2TMra1j/edit?usp=sharing&ouid=108018441576206007627&rtpof=true&sd=true)
+### Design
+[LINK](https://www.figma.com/design/5OgdqS40ZwVnHTliKHy3Hu/Untitled?node-id=0-1&t=0fNtUEQeOxwnXaMu-1)
