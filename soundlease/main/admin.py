@@ -22,7 +22,7 @@ class BeatAdmin(admin.ModelAdmin):
     raw_id_fields = ("tags",) #
     fieldsets = (
         ("", {
-            "fields": ("pub_date", "title", "description", "cover_image", "audio_file", "demo_file", "tags")
+            "fields": ("pub_date", "title", "author", "price", "description", "cover_image", "audio_file", "demo_file", "tags")
         }),
         (("Додатково",), {
             "classes": ("grp-collapse grp-closed",),

@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
@@ -17,6 +18,8 @@ class Tag(models.Model):
 
 class Beat(models.Model):
     title = models.CharField("Заголовок", max_length=255, help_text="Макс 255 символів")
+    author = models.CharField("Автор", max_length=64, help_text="Макс 64 символа", default="Unknown")
+    price = models.FloatField("Ціна", default= 0.00, validators=[MinValueValidator(0.00)])
     description = models.TextField(blank=True, verbose_name="Опис")
     pub_date = models.DateTimeField("Дата публікації", default=timezone.now)
     audio_file = models.FileField("Аудіо-файл", upload_to="beats/")

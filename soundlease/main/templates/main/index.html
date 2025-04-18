@@ -1,15 +1,59 @@
+{% extends 'main/main_layout.html' %}
 {% load static %}
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <title>HomePage</title>
-</head>
-<body>
-    <h1>Hello</h1>
-</body>
-</html>
+{% block title %} Main {% endblock %}
+{% block content %}
+  <div class="container10">
+    <h1>Sound Kits</h1>
+    <div class="kits-wrapper">
+      <div class="kit">
+        <img src="{% static 'img/1.png' %}" alt="Kit Cover">
+        <div class="kit-title">Weeklies Loops</div>
+        <div class="kit-price">$11.99</div>
+        <div class="kit-author">Lahaine</div>
+      </div>
+      <div class="kit">
+        <img src="{% static 'img/2.png' %}" alt="Kit Cover">
+        <div class="kit-title">Switchblade Drum Kit</div>
+        <div class="kit-price">$11.99</div>
+        <div class="kit-author">Lahaine</div>
+      </div>
+      <div class="kit">
+        <img src="{% static 'img/3.png' %}" alt="Kit Cover">
+        <div class="kit-title">John Glick Stash Kit</div>
+        <div class="kit-price">$11.99</div>
+        <div class="kit-author">Lahaine</div>
+      </div>
+      <div class="kit">
+        <img src="{% static 'img/4.png' %}" alt="Kit Cover">
+        <div class="kit-title">Carbonized Drum Kit</div>
+        <div class="kit-price">$11.99</div>
+        <div class="kit-author">Lahaine</div>
+      </div>
+      <div class="kit">
+        <img src="{% static 'img/5.png' %}" alt="Kit Cover">
+        <div class="kit-title">John Glick 4 Stash Kit</div>
+        <div class="kit-price">$11.99</div>
+        <div class="kit-author">Lahaine</div>
+      </div>
+      <div class="kit">
+        <img src="{% static 'img/6.png' %}" alt="Kit Cover">
+        <div class="kit-title">John Glick 3 Drum Kit</div>
+        <div class="kit-price">$11.99</div>
+        <div class="kit-author">Lahaine</div>
+      </div>
+      <div class="kit">
+        <img src="{% static 'img/7.png' %}" alt="Kit Cover">
+        <div class="kit-title">SynthCandy Stash Kit</div>
+        <div class="kit-price">$11.99</div>
+        <div class="kit-author">Lahaine</div>
+      </div>
+      <div class="kit">
+        <img src="{% static 'img/8.png' %}" alt="Kit Cover">
+        <div class="kit-title">John Glick 2 Drum Kit</div>
+        <div class="kit-price">$11.99</div>
+        <div class="kit-author">Lahaine</div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

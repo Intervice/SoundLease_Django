@@ -1,0 +1,19 @@
+{% extends 'main/main_layout.html' %}
+{% load static %}
+
+{% block title %} Main {% endblock %}
+{% block content %}
+  <div class="container10">
+    <h1>Sound Kits</h1>
+    <div class="kits-wrapper">
+        {% for beat in beats %}
+      <div class="kit">
+        <img src="{{ beat.cover_image.url }}" alt="Kit Cover">
+        <div class="kit-title"> {{ beat.title }}</div>
+        <div class="kit-price"> {{ beat.price }}</div>
+        <div class="kit-author">{{ beat.author }}</div>
+      </div>
+        {% endfor %}
+    </div>
+  </div>
+{% endblock %}
