@@ -1,0 +1,15 @@
+<div class="card">
+  <img src="{{ beat.cover_image.url }}" alt="item" id="myImage1">
+  <a class="smth" href="{{ beat.get_absolute_url }}">
+    <div class="price">{{ beat.price }}</div>
+    <div class="title">{{ beat.title }}</div>
+    <div class="creator">{{ beat.author }}</div>
+    <audio id="myAudio1">
+      {% if beat.demo_file %}
+      <source src="{{ beat.demo_file.url }}" type="audio/mpeg">
+      {% else %}
+      <source src="{{ beat.audio_file.url }}" type="audio/mpeg">
+      {% endif %}
+    </audio>
+  </a>
+</div>

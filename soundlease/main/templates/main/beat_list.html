@@ -4,6 +4,21 @@
 {% block title %} Beats {% endblock %}
 {% block content %}
 
-<div> HELLO </div>
+
+<div class="container5">
+    <div class="title5">Explore Tracks</div>
+    <div class="search-bar5">
+      <div class="search-input5">
+        <input type="text" placeholder="Search" />
+      </div>
+      <button class="search-button5">Search</button>
+    </div>
+  </div>
+    <section class="grid">
+        {% for beat in beats %}
+            {% include 'main/beat_card.html' %}
+        {% endfor %}
+
+  </section>
 
 {% endblock %}

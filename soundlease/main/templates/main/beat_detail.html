@@ -18,7 +18,7 @@
       </div>
       <div class="right6">
         <div class="top-right6">
-          <div class="total6">Total: <span>{{ beat.premium_price }}</span></div>
+<!--          <div class="total6">Total: <span>{{ beat.premium_price }}</span></div>-->
           <button class="add-button6">Add</button>
         </div>
         <div class="license-options6">
@@ -27,11 +27,14 @@
             <div class="license-details6">mp3</div>
             <div class="price6">{{ beat.price }}</div>
           </div>
-          <div class="license-card6">
-            <div class="license-card-title6">PREMIUM LICENCE</div>
-            <div class="license-details6">mp3, WAV</div>
-            <div class="price6">{{ beat.premium_price }}</div>
-          </div>
+          {% if beat.premium_price %}
+            <div class="license-card6">
+              <div class="license-card-title6">PREMIUM LICENCE</div>
+              <div class="license-details6">mp3, WAV</div>
+              <div class="price6">{{ beat.premium_price }}</div>
+            </div>
+          {% endif %}
+
         </div>
       </div>
     </div>

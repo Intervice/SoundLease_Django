@@ -23,7 +23,7 @@ class Beat(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Ціна",
                                 validators=[MinValueValidator(0.00)], default=0.00)
     premium_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Преміум ціна",
-                                        validators=[MinValueValidator(0.00)], default=0.00)
+                                        validators=[MinValueValidator(0.00)], blank=True, null=True)
     description = models.TextField(blank=True, verbose_name="Опис")
     pub_date = models.DateTimeField("Дата публікації", default=timezone.now)
     audio_file = models.FileField("Аудіо-файл", upload_to="beats/")
