@@ -1,0 +1,41 @@
+{% extends 'main/main_layout.html' %}
+{% load static %}
+
+{% block title %} {{ kit.title }} {% endblock %}
+
+{% block content %}
+
+
+<div class="container6">
+    <div class="title6">Licensing</div>
+    <div class="content6">
+      <div class="left6">
+        <img src="{{ kit.cover_image.url }}" alt="Track Cover" class="cover6" />
+        <div class="description6">
+          <strong>{{ kit.title }}</strong>
+          <p>{{ kit.description }}</p>
+        </div>
+      </div>
+      <div class="right6">
+        <div class="top-right6">
+          <div class="total6">Total: <span>{{ kit.premium_price }}</span></div>
+          <button class="add-button6">Add</button>
+        </div>
+        <div class="license-options6">
+          <div class="license-card6">
+            <div class="license-card-title6">BASIC LICENCE</div>
+            <div class="license-details6">mp3</div>
+            <div class="price6">{{ kit.price }}</div>
+          </div>
+          <div class="license-card6">
+            <div class="license-card-title6">PREMIUM LICENCE</div>
+            <div class="license-details6">mp3, WAV</div>
+            <div class="price6">{{ kit.premium_price }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+

@@ -1,0 +1,68 @@
+{% extends 'main/main_layout.html' %}
+{% load static %}
+
+{% block title %} SoundKits {% endblock %}
+{% block content %}
+
+  <div class="container5">
+    <div class="title5">Explore Sound Kits</div>
+    <div class="search-bar5">
+      <div class="search-input5">
+        <input type="text" placeholder="Search" />
+      </div>
+      <button class="search-button5">Search</button>
+    </div>
+  </div>
+  <div class="container10">
+    <h1>Sound Kits</h1>
+    <div class="kits-wrapper">
+        {% for kit in kits %}
+          {% include 'main/kit_card.html' %}
+        {% endfor %}
+
+    </div>
+  </div>
+
+  <script>
+    const kitsContainer = document.querySelector('.kits-wrapper');
+    let currentPage = 1;
+    let isLoading = false;
+    let hasNextPage = true;
+    const loadMoreURL = "{% url 'load-more-kits' %}"; // Додай це
+
+    function loadMoreKits() {
+      if (!isLoading && hasNextPage) {
+        isLoading = true;
+        currentPage++;
+        fetch(loadMoreURL + '?page=' + currentPage) // Використовуй loadMoreURL
+          .then(response => response.json())
+          .then(data => {
+            if (data.kits_html) {
+              kitsContainer.insertAdjacentHTML('beforeend', data.kits_html);
+              hasNextPage = data.has_next;
+            } else {
+              hasNextPage = false;
+              console.log("Більше немає контенту");
+            }
+            isLoading = false;
+          })
+          .catch(error => {
+            console.error("Помилка завантаження кітів:", error);
+            isLoading = false;
+          });
+      }
+    }
+
+    function checkScroll() {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const bodyHeight = document.body.offsetHeight;
+
+      if (scrollPosition + windowHeight >= bodyHeight - 200) {
+        loadMoreKits();
+      }
+    }
+    window.addEventListener("scroll", checkScroll);
+    currentPage = 1;
+</script>
+{% endblock %}

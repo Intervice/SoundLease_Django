@@ -15,24 +15,24 @@
 <body>
   <header>
     <img class="logogo" src="{% static 'img/logo.png' %}" alt="">
-    <div class="logo"><strong><a class="SL" href="main.html">SoundLease</a></strong></div>
+    <div class="logo"><strong><a class="SL" href="{% url 'home' %}">SoundLease</a></strong></div>
     <div class="nav-links">
-      <a class="buttonz" href="sign_up.html">
+      <a class="buttonz" href="{% url 'beat-list' %}">
         <div>Tracks</div>
       </a>
-      <a class="buttonz" href="">
+      <a class="buttonz" href="{% url 'kit-list' %}">
         <div>Sound Kits</div>
       </a>
-      <a class="buttonz" href="publishing.html">
+      <a class="buttonz" href="#">
         <div>Publishing</div>
       </a>
     </div>
     <div class="nav-right">
-      <a class="huu" href="sign_up.html">
+      <a class="huu" href="#">
         <div>Sign Up</div>
       </a>
       <div>|</div>
-      <a class="huu" href="sign_in.html">
+      <a class="huu" href="#">
         <div>Sign In</div>
       </a>
       <div class="start-selling">Start Selling</div>
