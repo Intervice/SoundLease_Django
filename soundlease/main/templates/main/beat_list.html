@@ -3,17 +3,65 @@
 
 {% block title %} Main {% endblock %}
 {% block content %}
-  <div class="container10">
-    <h1>Sound Kits</h1>
-    <div class="kits-wrapper">
-        {% for beat in beats %}
-      <div class="kit">
-        <img src="{{ beat.cover_image.url }}" alt="Kit Cover">
-        <div class="kit-title"> {{ beat.title }}</div>
-        <div class="kit-price"> {{ beat.price }}</div>
-        <div class="kit-author">{{ beat.author }}</div>
+
+  <div class="container5">
+    <div class="title5">Explore Tracks</div>
+    <div class="search-bar5">
+      <div class="search-input5">
+        <input type="text" placeholder="Search" />
       </div>
-        {% endfor %}
+      <button class="search-button5">Search</button>
     </div>
   </div>
+  <div class="container10">
+    <h1>Beats</h1>
+    <div class="kits-wrapper">
+        {% for beat in beats %}
+          {% include 'main/beat_card.html' %}
+        {% endfor %}
+
+    </div>
+  </div>
+
+  <script>
+    const beatsContainer = document.querySelector('.kits-wrapper');
+    let currentPage = 1;
+    let isLoading = false;
+    let hasNextPage = true;
+
+    function loadMoreBeats() {
+      if (!isLoading && hasNextPage) {
+        isLoading = true;
+        currentPage++;
+        fetch('/load-more-beats/?page=' + currentPage)
+          .then(response => response.json())
+          .then(data => {
+            if (data.beats_html) {
+              beatsContainer.insertAdjacentHTML('beforeend', data.beats_html);
+              hasNextPage = data.has_next;
+            } else {
+              hasNextPage = false;
+              console.log("Більше немає контенту");
+            }
+            isLoading = false;
+          })
+          .catch(error => {
+            console.error("Помилка завантаження бітів:", error);
+            isLoading = false;
+          });
+      }
+    }
+
+    function checkScroll() {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const bodyHeight = document.body.offsetHeight;
+
+      if (scrollPosition + windowHeight >= bodyHeight - 200) {
+        loadMoreBeats();
+      }
+    }
+    window.addEventListener("scroll", checkScroll);
+    currentPage = 1;
+</script>
 {% endblock %}
