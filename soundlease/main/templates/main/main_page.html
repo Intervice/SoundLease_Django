@@ -1,0 +1,140 @@
+{% extends "main/main_layout.html" %}
+{% load static %}
+
+{% block title %} SoundLease {% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-text">
+      <h1>Lease the perfect beat for your next hit song.</h1>
+      <div class="search-box">
+        <input type="text" placeholder="Search">
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="{% static 'img/image.jpg' %}" alt="Main Cover">
+    </div>
+  </section>
+    <section class="grid">
+        {% for item in combined_objects  %}
+            {% if item.type == "beat" %}
+                {% include 'main/beat_card.html' with beat=item.data %}
+            {% endif %}
+        {% endfor %}
+
+    </section>
+<div class="container10">
+    <h1>Latest Sound Kits</h1>
+    <div class="kits-wrapper">
+        {% for item in combined_objects %}
+            {% if item.type == "kit" %}
+                {% include 'main/kit_card.html' with kit=item.data %}
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+
+    <h1>Tags</h1>
+
+<div class="genres">
+    <div class="genre">
+      <div class="genre-title">trap</div>
+      Trap music is a subgenre of hip-hop characterized by its heavy use of 808 drum machines, ominous synthesizers, and rapid hi-hats. Originating in the southern United States, particularly Atlanta.
+    </div>
+    <div class="genre">
+      <div class="genre-title">pluggnb</div>
+      Pluggnb, short for “plug and beat,” is a subgenre of hip-hop and trap music that originated in the southern United States, particularly in cities like Atlanta and Houston.
+    </div>
+    <div class="genre">
+      <div class="genre-title">alien</div>
+      The “Alien” genre in music isn’t a standard term, but it can refer to musical works that experiment with sounds to create a sense of the unusual, mysterious, or even extraterrestrial.
+    </div>
+    <div class="genre">
+      <div class="genre-title">digital</div>
+      “Digital glitchy” typically refers to a style or aesthetic characterized by intentional glitches or errors in digital media, such as images, videos, or music.
+    </div>
+    <div class="genre">
+      <div class="genre-title">flexx</div>
+      “Flexx music” is a term often used to describe a genre of music characterized by its energetic and boastful lyrics, typically focused on themes of success, wealth, and confidence.
+    </div>
+</div>
+
+
+  <img class="beats" src="{% static 'img/thebeats.png' %}" alt="">
+  <div class="part2">
+
+    <h1>Watch our newest podcasts and interviews with artists!</h1>
+
+    <div class="top-section">
+      <div class="video">
+        <a href="https://www.youtube.com/watch?v=DxSLKYuib-s&ab_channel=OurGenerationMusic">
+          <img src="{% static 'img/kankan.png' %}" alt="Kankan">
+        </a>
+        <div class="video-info">
+          <strong>KANKAN</strong>
+          KanKan on Goin’ to Hell, Summrs & Autumn!, Speaker Knockerz<br>
+          130k views
+        </div>
+      </div>
+      <div class="video">
+        <a href="https://www.youtube.com/watch?v=fhOirilUFEI&ab_channel=ASafePlacePodcast">
+          <img src="{% static 'img/lucki.png' %}" alt="Lucki">
+        </a>
+        <div class="video-info">
+          <strong>LUCKI</strong>
+          Yachty, Mitch, & Lucki Get High and Get Fat | A Safe Place (Ep. 9)<br>
+          560k views
+        </div>
+      </div>
+    </div>
+    <div class="bottom-section">
+      <div>
+        <div class="features-list">
+          • Відсутність реклами<br>
+          • Можливість вибору типу ліцензій для продажу<br>
+          • Рекомендації основані на особистих уподобаннях<br>
+          • Можливість скачувати перед покупкою<br>
+          • Опція обміну або повернення<br>
+          • Завантаження куплених бітів у різних форматах
+        </div>
+
+        <div class="highlight-box">
+          Soundlease втілює глибоке розуміння потреб своїх користувачів, перевершуючи звичайні межі маркетплейсу.
+          Він створений не лише для продажу, але й для забезпечення ефективного використання вашого часу та максимального задоволення від процесу.
+        </div>
+      </div>
+
+      <div class="platforms">
+        <strong>Advantages of SoundLease over other platforms like this</strong>
+          <img class="BS" src="{% static 'img/BeatStars1.png' %}" alt="Beatstars">
+          <img class="BC" src="{% static 'img/bandcamp.png' %}" alt="Bandcamp">
+      </div>
+    </div>
+  </div>
+  <img class="plans" src="{% static 'img/group1.png' %}" alt="">
+  <p class="whatis">What is Beat Boost Community?</p>
+
+  <div class="sectionlol">
+    <div class="card2">
+      <img src="{% static 'img/analytics.png' %}" alt="Analytics chart" />
+    </div>
+    <div class="description">
+      <p>
+        Beat Boost Community is a community of producers and musicians aimed at boosting the popularity of music beat videos on YouTube. Members of the community mutually watch each other's videos, helping to increase their views and engagement. This contributes to growing the audience, popularity, and influence of each participant, fostering a positive environment for collaboration and interaction in the music industry.
+      </p>
+      <button class="read-more">Read More</button>
+    </div>
+  </div>
+
+  <div class="newsletter">
+    <p>Send me personalized tips for shopping and selling on BeatStars.</p>
+    <input type="email" placeholder="Enter your mail." />
+    <button>Subscribe</button>
+  </div>
+
+<script src="{% static 'js/default_volume.js' %}"></script>
+<script src="{% static 'js/pause_previous.js' %}"></script>
+<script src="{% static 'js/click_play.js' %}"></script>
+
+{% endblock %}

@@ -18,7 +18,54 @@
         {% for beat in beats %}
             {% include 'main/beat_card.html' %}
         {% endfor %}
+    </section>
 
-  </section>
+<script src="{% static 'js/default_volume.js' %}"></script>
+<script src="{% static 'js/pause_previous.js' %}"></script>
+<script src="{% static 'js/click_play.js' %}"></script>
+
+
+<script>
+    const beatsContainer = document.querySelector('.grid');
+    let currentPage = 1;
+    let isLoading = false;
+    let hasNextPage = true;
+    const loadMoreURL = "{% url 'load-more-beats' %}";
+
+    function loadMoreBeats() {
+      if (!isLoading && hasNextPage) {
+        isLoading = true;
+        currentPage++;
+        fetch(loadMoreURL + '?page=' + currentPage)
+          .then(response => response.json())
+          .then(data => {
+            if (data.beats_html) {
+              beatsContainer.insertAdjacentHTML('beforeend', data.beats_html);
+              hasNextPage = data.has_next;
+            } else {
+              hasNextPage = false;
+              console.log("Більше немає контенту");
+            }
+            isLoading = false;
+          })
+          .catch(error => {
+            console.error("Помилка завантаження бітів:", error);
+            isLoading = false;
+          });
+      }
+    }
+
+    function checkScroll() {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const bodyHeight = document.body.offsetHeight;
+
+      if (scrollPosition + windowHeight >= bodyHeight - 200) {
+        loadMoreBeats();
+      }
+    }
+    window.addEventListener("scroll", checkScroll);
+    currentPage = 1;
+</script>
 
 {% endblock %}

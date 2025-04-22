@@ -11,6 +11,13 @@
     <div class="content6">
       <div class="left6">
         <img src="{{ beat.cover_image.url }}" alt="Track Cover" class="cover6" />
+          <audio id="myAudio1" controls>
+              {% if beat.demo_file %}
+              <source src="{{ beat.demo_file.url }}" type="audio/mpeg">
+              {% else %}
+              <source src="{{ beat.audio_file.url }}" type="audio/mpeg">
+              {% endif %}
+          </audio>
         <div class="description6">
           <strong>{{ beat.title }}</strong>
           <p>{{ beat.description }}</p>
@@ -39,6 +46,8 @@
       </div>
     </div>
   </div>
+
+<script src="{% static 'js/default_volume.js' %}"></script>
 
 {% endblock %}
 

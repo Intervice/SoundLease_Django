@@ -67,7 +67,7 @@ body {
   .grid {
     display: flex;
     justify-content: space-between;
-    padding: 20px;
+    padding: 0px;
   }
   .card {
     width: 240px;

@@ -1,13 +1,59 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Beat, Tag, Kit
 from django.views import View
 from django.views.generic import ListView, DetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
+from itertools import chain
+from django.contrib.auth import login
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth.hashers import make_password
 
 
-def home(request):
-    return render(request, "main/main_layout.html")
+def register(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        confirm_password = request.POST.get("confirm_password")
+
+        if not username or not email or not password or not confirm_password:
+            messages.error(request, "Не всі поля заповнені.")
+            return render(request, "main/reg_page.html")
+
+        if password != confirm_password:
+            messages.error(request, "Паролі не збігаються.")
+            return render(request, "main/reg_page.html")
+
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Дане ім'я вже зайнято.")
+            return render(request, "main/reg_page.html")
+
+        if User.objects.filter(email=email).exists():
+            messages.error(request, "Дана пошта вже зайнята.")
+            return render(request, "main/reg_page.html")
+
+
+        user = User.objects.create_user(username=username, email=email, password=password)
+        login(request, user)
+        messages.success(request, "Реєстрація успішна.")
+        return redirect("home")
+
+    return render(request, "main/reg_page.html")
+
+
+class MainPageView(View):
+    def get(self, request, *args, **kwargs):
+        kits = Kit.objects.all()[:4]
+        beats = Beat.objects.all()[:5]
+
+        combined = list(chain(
+            [{'type': 'kit', 'data': kit} for kit in kits],
+            [{'type': 'beat', 'data': beat} for beat in beats]
+        ))
+        context = {'combined_objects': combined}
+        return render(request, 'main/main_page.html', context)
 
 
 class LoadMoreKits(View):
@@ -95,7 +141,7 @@ class LoadMoreBeats(View):
             beats_html_list = []
             for beat in beats_page:
                 beats_html_list.append(render(request, "main/beat_card.html",
-                                              {"beat": beat}).content.decote("utf-8"))
+                                              {"beat": beat}).content.decode("utf-8"))
 
 
             beats_html = "".join(beats_html_list)
