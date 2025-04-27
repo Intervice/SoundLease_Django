@@ -5,22 +5,67 @@ from django.views.generic import ListView, DetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
 from itertools import chain
-from django.contrib.auth import login
+from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth.hashers import make_password
+
+
+def publishing(request):
+    if request.user.is_authenticated:
+        return
+
+    return render(request, "main/publish_not_register.html")
+
+def logout_func(request):
+    logout(request)
+    return redirect("home")
+
+def log_in(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        print(f" {username} {password}")
+
+        if not username or not password:
+            messages.error(request, "Не всі поля заповнені.")
+            return render(request, "main/login_page.html")
+
+        if not User.objects.filter(username=username).exists():
+            messages.error(request, "Немає акаунту з таким іменем.")
+            return render(request, "main/login_page.html")
+
+        user = authenticate(request, username=username, password=password)
+
+        if user:
+            login(request, user)
+            return redirect("home")
+        else:
+            messages.error(request, "Неправильний пароль.")
+            return render(request, "main/login_page.html")
+    return render(request, "main/login_page.html")
 
 
 def register(request):
     if request.method == "POST":
+        # print("REQUEST POST DATA:")
+        # print(request.POST)
+
         username = request.POST.get("username")
         email = request.POST.get("email")
         password = request.POST.get("password")
-        confirm_password = request.POST.get("confirm_password")
+        confirm_password = request.POST.get("confirm-password_value")
+
+        # print(f"Username: '{username}'")
+        # print(f"Email: '{email}'")
+        # print(f"Password: '{password}'")
+        # print(f"Confirm Password: '{confirm_password}'")
 
         if not username or not email or not password or not confirm_password:
             messages.error(request, "Не всі поля заповнені.")
             return render(request, "main/reg_page.html")
+
+        print(f"Confirm Password BEFORE CHECK: '{confirm_password}'")
 
         if password != confirm_password:
             messages.error(request, "Паролі не збігаються.")

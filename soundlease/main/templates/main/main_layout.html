@@ -23,19 +23,25 @@
       <a class="buttonz" href="{% url 'kit-list' %}">
         <div>Sound Kits</div>
       </a>
-      <a class="buttonz" href="#">
+      <a class="buttonz" href="{% url 'publishing' %}">
         <div>Publishing</div>
       </a>
     </div>
     <div class="nav-right">
+      {% if request.user.is_authenticated %}
+      <div class="start-selling">Start Selling</div>
+      <a class="huu" href="{% url 'logout' %}">
+        <div>Log out</div>
+      </a>
+      {% else %}
       <a class="huu" href="{% url 'register' %}">
         <div>Sign Up</div>
       </a>
       <div>|</div>
-      <a class="huu" href="#">
+      <a class="huu" href="{% url 'login' %}">
         <div>Sign In</div>
       </a>
-      <div class="start-selling">Start Selling</div>
+      {% endif %}
     </div>
   </header>
 

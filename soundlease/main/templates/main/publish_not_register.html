@@ -1,0 +1,47 @@
+{% extends 'main/main_layout.html' %}
+{% load static %}
+
+{% block title %} Publishing {% endblock %}
+{% block content %}
+
+<section class="hero">
+    <div class="hero-text2">
+      <p class="start"> <b>Start getting paid the <br> royalties you're owed</b></p>
+      <p class="start2">Read the article below to get all information needed to get started</p>
+    </div>
+    <div class="hero-image2">
+      <img src="{% static 'img/Mask group (1).png' %}" alt="Main Cover">
+    </div>
+  </section>
+
+  <div class="movable-section">
+    <p class="main-title">Our Services</p>
+    <p class="subtitle">Sit back and celebrate your achievements. Our features handle the complexities of royalty collection for a stress-free experience.</p>
+
+    <div class="services">
+      <div class="service">
+        <img src="{% static 'img/micro.png' %}" alt="Register Icon" />
+        <p class="service-title">Register Copyrights<br>with us</p>
+        <p class="service-text">Benefit-focused<br>Ensure your ownership - start the process to register your copyrights!</p>
+      </div>
+      <div class="service">
+        <img src="{% static 'img/note.png' %}" alt="Publishing Icon" />
+        <p class="service-title">SoundLease Publishing</p>
+        <p class="service-text">Unleash your music's earning potential - explore our sound music publishing solutions!</p>
+      </div>
+      <div class="service">
+        <img src="{% static 'img/bucks.png' %}" alt="Royalties Icon" />
+        <p class="service-title">Receive major part of<br>your royalties</p>
+        <p class="service-text">Highlight the high percentage:<br>Keep more of what you earn - receive 95% of your royalties with us!</p>
+      </div>
+    </div>
+
+    <button class="cta-button"><a class="keklol" href="{% url 'register' %}">Join Us Today</a></button>
+  </div>
+<!--  <div class="email-subscribe">-->
+<!--    <p>Send me personalized tips for shopping and selling on BeatStars.</p>-->
+<!--    <input type="email" placeholder="Enter your mail." />-->
+<!--    <button>Subscribe</button>-->
+<!--  </div>-->
+
+{% endblock %}
