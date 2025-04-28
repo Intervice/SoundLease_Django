@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1280">
+  <link rel="stylesheet" href="css/style.css" >
+  <title>Завантаження файлу</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .upload-container {
+      width: 400px;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 30px;
+    }
+    label {
+      display: block;
+      text-align: left;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+    input[type="file"] {
+      width: 100%;
+      margin-bottom: 20px;
+      padding: 10px;
+      background: #222;
+      color: white;
+      border: 1px solid #555;
+      border-radius: 5px;
+    }
+    button {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: darkred;
+    }
+  </style>
+</head>
+<body>
+
+<div class="upload-container">
+  <h1>Завантаження файлу</h1>
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    <label for="file">Оберіть файл:</label>
+    <input type="file" id="file" name="file" required>
+    <button type="submit">Завантажити</button>
+  </form>
+</div>
+
+</body>
+</html>
