@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (KitList, LoadMoreKits, BeatList, LoadMoreBeats, KitDetail, BeatDetail, MainPageView,
-                    register, logout_func, log_in, UploadBeatView)
+                    register, logout_func, log_in, UploadBeatView, SearchBeatsView)
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -16,4 +16,5 @@ urlpatterns = [
     path(r"beats/", BeatList.as_view(), name="beat-list"),
     path(r"load-more-beats/", LoadMoreBeats.as_view(), name="load-more-beats"),
     path(r"beats/<slug:slug>", BeatDetail.as_view(), name="beat-detail"),
+    path('search/beats/', SearchBeatsView.as_view(), name="search-beats"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

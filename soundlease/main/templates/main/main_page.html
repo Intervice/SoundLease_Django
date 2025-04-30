@@ -7,14 +7,19 @@
 <section class="hero">
     <div class="hero-text">
       <h1>Lease the perfect beat for your next hit song.</h1>
-      <div class="search-box">
-        <input type="text" placeholder="Search">
-      </div>
+          <form method="get" action="{% url 'search-beats' %}">
+            <div class="search-box">
+                <input type="text" name="q" placeholder="Search">
+                <button type="submit" class="search-button5">Search</button>
+            </div>
+          </form>
     </div>
+
     <div class="hero-image">
       <img src="{% static 'img/image.jpg' %}" alt="Main Cover">
     </div>
-  </section>
+</section>
+
     <section class="grid">
         {% for item in combined_objects  %}
             {% if item.type == "beat" %}

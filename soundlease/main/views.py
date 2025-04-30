@@ -14,6 +14,20 @@ from django.urls import reverse_lazy, reverse
 from django.utils.text import slugify
 
 
+class SearchBeatsView(View):
+    def get(self, request, *args, **kwargs):
+        query = request.GET.get('q')
+        beats = Beat.objects.all()
+        if query:
+            beats = Beat.objects.filter(title__icontains=query)
+
+        context = {
+            'beats': beats,
+            'query': query,
+        }
+        return render(request, 'main/beat_list.html', context)
+
+
 class UploadBeatView(FormView):
     template_name = "main/publishing.html"
     form_class = BeatForm

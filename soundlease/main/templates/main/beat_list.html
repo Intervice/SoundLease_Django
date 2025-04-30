@@ -8,12 +8,18 @@
 <div class="container5">
     <div class="title5">Explore Tracks</div>
     <div class="search-bar5">
-      <div class="search-input5">
-        <input type="text" placeholder="Search" />
-      </div>
-      <button class="search-button5">Search</button>
+        <form method="get" action="{% url 'search-beats' %}">
+            <div class="search-input5">
+                {% if query %}
+                    <input type="text" name="q" placeholder="{{ query }}">
+                {% else %}
+                    <input type="text" name="q" placeholder="Search">
+                {% endif %}
+            </div>
+            <button type="submit" class="search-button5">Search</button>
+        </form>
     </div>
-  </div>
+</div>
     <section class="grid">
         {% for beat in beats %}
             {% include 'main/beat_card.html' %}
