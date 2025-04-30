@@ -3,7 +3,44 @@
 
 {% block title %} Publishing {% endblock %}
 {% block content %}
+{% spaceless %}
 
+{% if request.user.is_authenticated %}
 
+<div class="upload-container">
+  <h1>Завантаження файлу</h1>
+    <form action="publishing/" method="post" enctype="multipart/form-data">
+        {% if form.errors %}
+    <div class="alert alert-danger">
+        Будь ласка, виправте наступні помилки:
+        <ul>
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li><strong>{{ field.label }}</strong>: {{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
 
+    <form action="/publishing/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.help_text %}
+                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Завантажити трек</button>
+    </form>
+    </form>
+</div>
+{% else %}
+{% include 'main/publish_not_register.html' %}
+{% endif %}
+
+{% endspaceless %}
 {% endblock %}

@@ -2,6 +2,7 @@ from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
+from django.utils.text import slugify
 
 
 class Tag(models.Model):
@@ -25,14 +26,20 @@ class Beat(models.Model):
     premium_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Преміум ціна",
                                         validators=[MinValueValidator(0.00)], blank=True, null=True, default=0)
     description = models.TextField(blank=True, verbose_name="Опис")
-    pub_date = models.DateTimeField("Дата публікації", default=timezone.now)
+    pub_date = models.DateTimeField("Дата публікації", default=timezone.now, blank=True, null=True)
     audio_file = models.FileField("Аудіо-файл", upload_to="beats/")
     demo_file = models.FileField("Демо-файл", upload_to="demos/", blank=True, null=True)
-    cover_image = models.ImageField("Обкладинка", upload_to="covers/", default="img/default.png")
-    slug = models.SlugField("Слаг")
+    cover_image = models.ImageField("Обкладинка", upload_to="covers/", default="img/default.png",
+                                    blank=True, null=True)
+    slug = models.SlugField("Слаг", unique=True)  # Додано unique=True
     tags = models.ManyToManyField(Tag, verbose_name="Теги", blank=True)
 
     objects = models.Manager()
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title
@@ -43,12 +50,6 @@ class Beat(models.Model):
         except:
             url = "/"
         return url
-
-
-    class Meta:
-        ordering = ["-pub_date"]
-        verbose_name = "Біт"
-        verbose_name_plural = "Біти"
 
 
 class Kit(models.Model):

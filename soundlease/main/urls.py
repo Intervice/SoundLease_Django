@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (KitList, LoadMoreKits, BeatList, LoadMoreBeats, KitDetail, BeatDetail, MainPageView,
-                    register, logout_func, log_in, publishing)
+                    register, logout_func, log_in, UploadBeatView)
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -9,7 +9,7 @@ urlpatterns = [
     path("logout/", logout_func, name="logout"),
     path("register/", register, name="register"),
     path("login/", log_in, name="login"),
-    path("publishing/", publishing, name="publishing"),
+    path("publishing/", UploadBeatView.as_view(), name="publishing"),
     path(r"kits/", KitList.as_view(), name="kit-list"),
     path(r"load-more-kits/", LoadMoreKits.as_view(), name="load-more-kits"),
     path(r"kits/<slug:slug>", KitDetail.as_view(), name="kit-detail"),

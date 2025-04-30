@@ -2,23 +2,35 @@ from django.shortcuts import render, redirect
 from .models import Beat, Tag, Kit
 from django.views import View
 from django.views.generic import ListView, DetailView
+from django.views.generic.edit import FormView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
 from itertools import chain
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.contrib import messages
+from .forms import BeatForm
+from django.urls import reverse_lazy, reverse
+from django.utils.text import slugify
 
 
-def publishing(request):
-    if request.user.is_authenticated:
-        return
+class UploadBeatView(FormView):
+    template_name = "main/publishing.html"
+    form_class = BeatForm
+    success_url = reverse_lazy('beat-list')
 
-    return render(request, "main/publish_not_register.html")
+    def form_valid(self, form):
+        beat = form.save(commit=False)
+        beat.author = self.request.user
+        beat.slug = slugify(beat.title)
+        beat.save()
+        form.save_m2m()
+        return super().form_valid(form)
+
 
 def logout_func(request):
     logout(request)
-    return redirect("home")
+    return redirect(reverse("home"))
 
 def log_in(request):
     if request.method == "POST":
@@ -39,7 +51,8 @@ def log_in(request):
 
         if user:
             login(request, user)
-            return redirect("home")
+            return redirect(reverse("home"))
+
         else:
             messages.error(request, "Неправильний пароль.")
             return render(request, "main/login_page.html")
@@ -83,7 +96,7 @@ def register(request):
         user = User.objects.create_user(username=username, email=email, password=password)
         login(request, user)
         messages.success(request, "Реєстрація успішна.")
-        return redirect("home")
+        return redirect(reverse("home"))
 
     return render(request, "main/reg_page.html")
 
