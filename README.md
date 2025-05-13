@@ -12,5 +12,4 @@
 [LINK](https://www.figma.com/design/5OgdqS40ZwVnHTliKHy3Hu/Untitled?node-id=0-1&t=0fNtUEQeOxwnXaMu-1)
 
 ## Presentation
-[LINK]
-(https://docs.google.com/presentation/d/16r76VRdF93zXbdqo-htttjRO3rHHpqA0/edit?usp=drivesdk&ouid=108018441576206007627&rtpof=true&sd=true)
+[LINK](https://docs.google.com/presentation/d/16r76VRdF93zXbdqo-htttjRO3rHHpqA0/edit?usp=drivesdk&ouid=108018441576206007627&rtpof=true&sd=true)
